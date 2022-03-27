@@ -28,7 +28,6 @@ const LoginMessage = ({ content }) => (
 
 const Login = () => {
   const [userLoginState, setUserLoginState] = useState({});
-  // const [type, setType] = useState('account');
   const { initialState, setInitialState } = useModel('@@initialState');
   const intl = useIntl();
 
@@ -43,18 +42,19 @@ const Login = () => {
   const handleSubmit = async (values) => {
     try {
       const msg = await login({ ...values });
-
+      console.log('MSG : ', msg);
       if (msg.status === 'ok') {
         localStorage.setItem('user_token', msg.data.token);
 
-        const defaultLoginSuccessMessage = intl.formatMessage({
-          id: 'pages.login.success',
-          defaultMessage: 'Login Success',
-        });
+        const defaultLoginSuccessMessage = 'Login Success';
+        // const defaultLoginSuccessMessage = intl.formatMessage({
+        //   id: 'pages.login.success',
+        //   defaultMessage: 'Login Success',
+        // });
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
-        /** 此方法会跳转到 redirect 参数所在的位置 */
 
+        console.log('HISTORY : ', history);
         if (!history) return;
         const { query } = history.location;
         const { redirect } = query;
@@ -62,14 +62,15 @@ const Login = () => {
         return;
       }
 
-      console.log(msg);
+      // console.log('check msgnya : ', msg);
 
       setUserLoginState(msg);
     } catch (error) {
-      const defaultLoginFailureMessage = intl.formatMessage({
-        id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
-      });
+      const defaultLoginFailureMessage = 'Login Failed !';
+      // const defaultLoginFailureMessage = intl.formatMessage({
+      //   id: 'pages.login.failure',
+      //   defaultMessage: '登录失败，请重试！',
+      // });
       message.error(defaultLoginFailureMessage);
     }
   };
