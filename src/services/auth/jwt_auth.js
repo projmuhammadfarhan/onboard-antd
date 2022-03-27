@@ -1,27 +1,27 @@
 import jwtDecode from 'jwt-decode';
-
 const JWTAuth = () => {
   const getToken = localStorage.getItem('user_token');
 
-  isLogin = false;
-  try {
-    if (getToken !== '') {
-      const decodeToken = jwtDecode(getToken);
-      return {
-        isLogin: true,
-        userId: decodeToken.userId,
-      };
-    } else {
-      return {
-        isLogin: false,
-        userId: null,
-      };
-    }
-  } catch (error) {
+  const isLogin = getToken ? true : false; // rubah kyk gini bisaa nga
+  if (isLogin) {
+    const decodeToken = jwtDecode(getToken);
+    const userId = decodeToken?.user_id;
+    const nameUser = decodeToken?.name;
+    const roleUser = decodeToken?.role;
+    // console.log('JWT AUTH USERID : ', userId);
     return {
-      isLogin: false,
-      userId: null,
+      isLogin,
+      userId,
+      nameUser,
+      roleUser,
     };
   }
+  return {
+    isLogin: false,
+    userId: null,
+    nameUser: null,
+    roleUser: null,
+  };
 };
+
 export default JWTAuth;

@@ -6,7 +6,9 @@ import { request } from 'umi';
 const setDB = 'http://localhost:8001/';
 
 export async function currentUser() {
-  return request(setDB + 'users/', {
+  const { currentUser } = initialState;
+  getId = currentUser.user_id;
+  return request(setDB + 'user/${getId}', {
     method: 'GET',
   });
 }
@@ -27,7 +29,7 @@ export async function login(body) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body),
+    data: JSON.stringify(body),
     // ...(options || {}),
   });
 }

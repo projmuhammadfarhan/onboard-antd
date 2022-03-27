@@ -18,9 +18,9 @@ const loginOut = async () => {
   if (window.location.pathname !== '/user/login' && !redirect) {
     history.replace({
       pathname: '/user/login',
-      search: stringify({
-        redirect: pathname + search,
-      }),
+      // search: stringify({
+      //   redirect: pathname + search,
+      // }),
     });
   }
 };
@@ -34,9 +34,10 @@ const AvatarDropdown = ({ menu }) => {
       if (key === 'logout') {
         setInitialState((s) => ({ ...s, currentUser: undefined }));
         loginOut();
+        localStorage.removeItem('user_token');
         return;
       }
-
+      console.log('KEY AVATAR : ', key);
       history.push(`/account/${key}`);
     },
     [setInitialState],
@@ -59,7 +60,7 @@ const AvatarDropdown = ({ menu }) => {
 
   const { currentUser } = initialState;
 
-  if (!currentUser || !currentUser.name) {
+  if (!currentUser || !currentUser.userId) {
     return loading;
   }
 
@@ -81,7 +82,7 @@ const AvatarDropdown = ({ menu }) => {
 
       <Menu.Item key="logout">
         <LogoutOutlined />
-        退出登录
+        Keluar
       </Menu.Item>
     </Menu>
   );
@@ -89,7 +90,7 @@ const AvatarDropdown = ({ menu }) => {
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
         <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-        <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+        <span className={`${styles.name} anticon`}>{currentUser.nameUser}</span>
       </span>
     </HeaderDropdown>
   );

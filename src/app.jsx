@@ -56,11 +56,12 @@ export async function getInitialState() {
 } // ProLayout 支持的api https://procomponents.ant.design/components/layout
 
 export const layout = ({ initialState, setInitialState }) => {
+  // console.log('initialState: ' + JSON.stringify(initialState));
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     // waterMarkProps: {
-    //   content: initialState?.currentUser?.name,
+    //   content: initialState?.currentUser?.userId,
     // },
     // footerRender: () => <Footer />,
     onPageChange: () => {
