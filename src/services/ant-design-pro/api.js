@@ -27,7 +27,7 @@ export async function login(body) {
     headers: {
       'Content-Type': 'application/json',
     },
-    data: JSON.stringify(body),
+    body: JSON.stringify(body),
     // ...(options || {}),
   });
 }
