@@ -22,7 +22,7 @@ const GlobalHeaderRight = () => {
 
   return (
     <Space className={className}>
-      <HeaderSearch
+      {/* <HeaderSearch
         className={`${styles.action} ${styles.search}`}
         placeholder="站内搜索"
         defaultValue="umi ui"
@@ -43,10 +43,11 @@ const GlobalHeaderRight = () => {
             label: <a href="https://prolayout.ant.design/">Pro Layout</a>,
             value: 'Pro Layout',
           },
-        ]} // onSearch={value => {
+        ]} 
+        // onSearch={value => {
         //   console.log('input', value);
         // }}
-      />
+      /> */}
       <span
         className={styles.action}
         onClick={() => {
@@ -56,7 +57,7 @@ const GlobalHeaderRight = () => {
         <QuestionCircleOutlined />
       </span>
       <Avatar />
-      <SelectLang className={styles.action} />
+      {/* <SelectLang className={styles.action} /> */}
     </Space>
   );
 };
