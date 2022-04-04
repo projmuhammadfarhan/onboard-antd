@@ -4,15 +4,29 @@
 import { request } from 'umi';
 /** 获取当前的用户 GET /api/currentUser */
 const setDB = 'http://localhost:8001/';
+const user_token = localStorage.getItem('user_token');
 
-export async function currentUser() {
-  const { currentUser } = initialState;
-  getId = currentUser.user_id;
-  return request(setDB + 'user/${getId}', {
+export async function GET_User() {
+  // console.log('USER TOKEN API : ', JSON.stringify(user_token));
+  return request(setDB + 'users', {
     method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + user_token,
+    },
   });
 }
 /** 退出登录接口 POST /api/login/outLogin */
+
+// GET_PRODUCT
+export async function GET_Product() {
+  // console.log('USER TOKEN API : ', JSON.stringify(user_token));
+  return request(setDB + 'products', {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + user_token,
+    },
+  });
+}
 
 export async function outLogin(options) {
   return request('/api/login/outLogin', {

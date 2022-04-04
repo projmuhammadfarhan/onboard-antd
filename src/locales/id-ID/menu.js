@@ -23,6 +23,7 @@ export default {
   'menu.form.advanced-form': 'Form Lanjutan',
   'menu.list': 'Daftar',
   'menu.list.table-list': 'Tabel Pencarian',
+  'menu.data.users': 'Data Users',
   'menu.list.basic-list': 'Daftar Dasar',
   'menu.list.card-list': 'Daftar Kartu',
   'menu.list.search-list': 'Daftar Pencarian',

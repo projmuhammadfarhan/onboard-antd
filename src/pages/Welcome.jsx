@@ -30,7 +30,7 @@ const Welcome = () => {
             marginBottom: 24,
           }}
         />
-        <Typography.Text strong>
+        {/* <Typography.Text strong>
           <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="Advanced Form" />{' '}
           <a
             href="https://procomponents.ant.design/components/table"
@@ -39,9 +39,9 @@ const Welcome = () => {
           >
             <FormattedMessage id="pages.welcome.link" defaultMessage="Welcome" />
           </a>
-        </Typography.Text>
+        </Typography.Text> */}
         {/* <CodePreview>yarn add @ant-design/pro-table</CodePreview> */}
-        <Typography.Text
+        {/* <Typography.Text
           strong
           style={{
             marginBottom: 12,
@@ -55,7 +55,7 @@ const Welcome = () => {
           >
             <FormattedMessage id="pages.welcome.link" defaultMessage="Welcome" />
           </a>
-        </Typography.Text>
+        </Typography.Text> */}
         {/* <CodePreview>yarn add @ant-design/pro-layout</CodePreview> */}
       </Card>
     </PageContainer>
