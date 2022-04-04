@@ -2,14 +2,10 @@ import { SettingDrawer } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import { history } from 'umi';
 import RightContent from '@/components/RightContent';
-// import Footer from '@/components/Footer';
-// import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-// import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import JWTAuth from './services/auth/jwt_auth';
-// const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
-/** 获取用户信息比较慢的时候会展示一个 loading */
+const welcomePath = '/';
 
 export const initialStateConfig = {
   loading: <PageLoading />,
@@ -20,69 +16,42 @@ export const initialStateConfig = {
 
 export async function getInitialState() {
   const fetchUserInfo = async () => {
-    // try {
-    if (JWTAuth().isLogin) {
-      return JWTAuth();
-      // console.log('JWT AUTH APP : ', JWTAuth);
+    try {
+      if (JWTAuth().isLogin) {
+        return JWTAuth();
+      }
+      history.push(loginPath);
+    } catch (error) {
+      history.push(loginPath);
     }
-    return undefined;
-    // return msg.data;
-    // } catch (error) {
-    //   history.push(loginPath);
-    // }
-    // try {
-    //   const msg = await queryCurrentUser();
-    //   return msg.data;
-    // } catch (error) {
-    //   history.push(loginPath);
-    // }
+  };
 
-    // return undefined;
-  }; // 如果不是登录页面，执行
-
-  if (history.location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings,
-    };
-  }
-
+  const currentUser = await fetchUserInfo();
   return {
     fetchUserInfo,
+    currentUser,
     settings: defaultSettings,
   };
-} // ProLayout 支持的api https://procomponents.ant.design/components/layout
+}
 
 export const layout = ({ initialState, setInitialState }) => {
-  // console.log('initialState: ' + JSON.stringify(initialState));
+  // console.log('initialState: ' + JSON.stringify(JWTAuth()));
+
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
-    // waterMarkProps: {
-    //   content: initialState?.currentUser?.userId,
-    // },
-    // footerRender: () => <Footer />,
     onPageChange: () => {
-      const { location } = history; // 如果没有登录，重定向到 login
-      // if (!initialState)
+      const { location } = history; // 如果没有登录，重定向到 login\
+      // console.log('INISIALSTATE :', initialState);
+      // console.log('HISTORY :', location);
+
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         history.push(loginPath);
       }
+      if (initialState?.currentUser && location.pathname == loginPath) {
+        history.push(welcomePath);
+      }
     },
-    // links: isDev
-    //   ? [
-    //       <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-    //         <LinkOutlined />
-    //         <span>OpenAPI 文档</span>
-    //       </Link>,
-    //       <Link to="/~docs" key="docs">
-    //         <BookOutlined />
-    //         <span>业务组件文档</span>
-    //       </Link>,
-    //     ]
-    //   : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
@@ -92,7 +61,7 @@ export const layout = ({ initialState, setInitialState }) => {
       return (
         <>
           {children}
-          {!props.location?.pathname?.includes('/login') && (
+          {!props.location?.pathname?.includes('/user/login') && (
             <SettingDrawer
               disableUrlParams
               enableDarkTheme

@@ -1,4 +1,6 @@
 export default {
+  'menu.dataUser': 'Data Users',
+  'menu.dataProduct': 'Data Products',
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
   'menu.home': 'Home',
@@ -23,6 +25,8 @@ export default {
   'menu.form.advanced-form': 'Advanced Form',
   'menu.list': 'List',
   'menu.list.table-list': 'Search Table',
+  'menu.data.users': 'Data Users',
+  'menu.data.products': 'Data Products',
   'menu.list.basic-list': 'Basic List',
   'menu.list.card-list': 'Card List',
   'menu.list.search-list': 'Search List',

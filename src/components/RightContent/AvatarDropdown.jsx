@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
 import { history, useModel } from 'umi';
-import { stringify } from 'querystring';
+// import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import { outLogin } from '@/services/ant-design-pro/api';
@@ -12,7 +12,8 @@ import { outLogin } from '@/services/ant-design-pro/api';
  */
 const loginOut = async () => {
   await outLogin();
-  const { query = {}, search, pathname } = history.location;
+  const { query = {} } = history.location;
+  // const { query = {}, search, pathname } = history.location;
   const { redirect } = query; // Note: There may be security issues, please note
 
   if (window.location.pathname !== '/user/login' && !redirect) {
@@ -37,8 +38,8 @@ const AvatarDropdown = ({ menu }) => {
         localStorage.removeItem('user_token');
         return;
       }
-      console.log('KEY AVATAR : ', key);
-      history.push(`/account/${key}`);
+      history.push(`/user/login`);
+      // history.push(`/account/${key}`);
     },
     [setInitialState],
   );
@@ -66,7 +67,7 @@ const AvatarDropdown = ({ menu }) => {
 
   const menuHeaderDropdown = (
     <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-      {menu && (
+      {/* {menu && (
         <Menu.Item key="center">
           <UserOutlined />
           个人中心
@@ -77,7 +78,7 @@ const AvatarDropdown = ({ menu }) => {
           <SettingOutlined />
           个人设置
         </Menu.Item>
-      )}
+      )} */}
       {menu && <Menu.Divider />}
 
       <Menu.Item key="logout">

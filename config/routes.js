@@ -1,4 +1,5 @@
 export default [
+  // User Login
   {
     path: '/user',
     layout: false,
@@ -18,36 +19,31 @@ export default [
       },
     ],
   },
+
+  // Menu Welcome
   {
     path: '/welcome',
     name: 'welcome',
     icon: 'smile',
     component: './Welcome',
   },
+
+  // Menu Data Users
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    component: './Admin',
-    routes: [
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        icon: 'smile',
-        component: './Welcome',
-      },
-      {
-        component: './404',
-      },
-    ],
+    // path: '/user',
+    name: 'dataUser',
+    path: '/users',
+    component: './user/userList',
   },
+
+  // Menu Data Product
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    // path: '/product',
+    name: 'dataProduct',
+    path: '/products',
+    component: './product/productList',
   },
+
   {
     path: '/',
     redirect: '/welcome',
